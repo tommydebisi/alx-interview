@@ -17,7 +17,7 @@ def pascal_triangle(n):
     i = 0
 
     if n <= 0:
-        return [[]]
+        return []
     if n == 1:
         return final_list
 
