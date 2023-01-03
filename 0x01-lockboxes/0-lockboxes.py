@@ -3,6 +3,7 @@
     Lockboxes problem solution
 """
 
+
 def canUnlockAll(boxes):
     """
         Returns a truthy value if all boxes in the array can opened
@@ -16,7 +17,7 @@ def canUnlockAll(boxes):
 
     for index, val in enumerate(boxes):
         # check if index box can't be unlocked
-        if not (index in unlocked_set):
+        if not (index in unlocked_set) or type(val) != list:
             return False
 
         # add key indexes from unlocked box
