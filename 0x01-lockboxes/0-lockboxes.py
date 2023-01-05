@@ -9,7 +9,7 @@ def canUnlockAll(boxes):
         Returns a truthy value if all boxes in the array can opened
     """
     # check if boxes is a list
-    if type(boxes) != list:
+    if type(boxes) != list or len(boxes) == 0:
         return False
 
     unlocked_set = set()
