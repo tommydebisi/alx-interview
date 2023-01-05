@@ -17,13 +17,13 @@ def canUnlockAll(boxes):
 
     for index, val in enumerate(boxes):
         # check if index box can't be unlocked
-        if not (index in unlocked_set) or type(val) != list:
+        if type(val) != list or not (index in unlocked_set):
             return False
 
         # add key indexes from unlocked box
         for elem in val:
             # go to each elem index and update the set
-            if elem < len(boxes):
+            if elem < len(boxes) and type(elem) == int:
                 unlocked_set.update(boxes[elem])
         unlocked_set.update(val)
 
