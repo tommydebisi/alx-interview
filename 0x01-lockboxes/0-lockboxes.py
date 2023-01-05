@@ -23,7 +23,7 @@ def canUnlockAll(boxes):
         # add key indexes from unlocked box
         for elem in val:
             # go to each elem index and update the set
-            if elem < len(boxes) - 1 and elem > index:
+            if elem < len(boxes) and elem > index:
                 unlocked_set.update(boxes[elem])
         unlocked_set.update(val)
 
