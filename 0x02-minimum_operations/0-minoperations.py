@@ -2,7 +2,6 @@
 """
     0-minoperations mod
 """
-from sympy import isprime
 
 
 def minOperations(n):
@@ -19,12 +18,12 @@ def minOperations(n):
     if n <= 1 or not isinstance(n, int):
         return 0
 
-    if isprime(n):
+    if isPrime(n):
         return n
 
     if n % 2 == 0:
         val = even_operation(n)
-        if not isprime(val) and val % 2 != 0:
+        if not isPrime(val) and val % 2 != 0:
             val = odd_divisor(val)
     else:
         val = odd_divisor(n)
@@ -44,7 +43,7 @@ def even_operation(num):
     """
     num //= 2
 
-    if not isprime(num) and num % 2 == 0:
+    if not isPrime(num) and num % 2 == 0:
         num = even_operation(num)
 
     return num if num % 2 != 0 else num + 2
@@ -57,3 +56,16 @@ def odd_divisor(num):
     for i in range(3, num // 2):
         if num % i == 0:
             return i
+
+def isPrime(num):
+    """
+        checks if a number is prime
+    """
+    if num <= 1:
+        return False
+
+    for i in range(2, num // 2):
+        if num % i == 0:
+            return False
+
+    return True
