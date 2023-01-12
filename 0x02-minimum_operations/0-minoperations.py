@@ -21,41 +21,48 @@ def minOperations(n):
     if isPrime(n):
         return n
 
-    if n % 2 == 0:
-        val = even_operation(n)
-        if not isPrime(val) and val % 2 != 0:
-            val = odd_divisor(val)
-    else:
-        val = odd_divisor(n)
-
-    return val if val % 2 == 0 else val + (n // val)
+    return even_odd_ops(n)
 
 
-def even_operation(num):
+def even_odd_ops(num):
     """
-        calculates the fewest number of operations for even numbers
+        calculates the fewest number of operations for even
+        and odd numbers
 
         Args:
             num: number to check for
 
         Returns:
-            even number which is the fewest or odd number which is not sure
+            the fewest number of operations for a number
     """
-    num //= 2
+    if isPrime(num):  # prime num can't be divided, return num
+        return num
+    else:
+        if num % 2 != 0:  # check if odd number is passed in
+            return odd_operation(num)
 
-    if not isPrime(num) and num % 2 == 0:
-        num = even_operation(num)
-
-    return num if num % 2 != 0 else num + 2
+    return even_odd_ops(num // 2) + 2  # num is even, add 2
 
 
-def odd_divisor(num):
+def odd_operation(odd_num):
     """
-        calculates the least possible divisor of num
+        calculates the fewest number of operations for an odd number
+        passed in
     """
-    for i in range(3, num // 2):
-        if num % i == 0:
-            return i
+    prev = 0
+    ops = 0
+
+    for i in range(3, odd_num // 2):
+        if odd_num % i == 0:  # check for multiples of odd number
+            if prev == 0:
+                ops = i
+                prev = i
+            elif i % prev == 0:  # check if current is divisible by prev
+                ops += (i // prev)  # update operation
+                prev = i
+
+    return ops + (odd_num // prev)
+
 
 def isPrime(num):
     """
