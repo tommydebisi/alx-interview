@@ -10,6 +10,16 @@ fsize_sum = 0
 status_obj = dict()
 regex = r"^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$"
 
+
+def report_message(file_size, status_obj):
+    """
+        prints the format message to screen
+    """
+    print("File size: {}".format(file_size))
+    for key in sorted(status_obj):
+        print("{}: {}".format(key, status_obj.get(key)))
+
+
 try:
     for line in sys.stdin:
         if not re.search(regex, line):
@@ -27,19 +37,12 @@ try:
         line_count += 1
 
         if line_count == 10:
-            print("File size: {}".format(fsize_sum))
-            for key in sorted(status_obj):
-                print("{}: {}".format(key, status_obj.get(key)))
+            report_message(fsize_sum, status_obj)
             line_count = 0
 
-    if line_count < 10:
-        print("File size: {}".format(fsize_sum))
-        for key in sorted(status_obj):
-            print("{}: {}".format(key, status_obj.get(key)))
-
+    # means that message hasn't been printed
+    if line_count > 0:
+        report_message(fsize_sum, status_obj)
 except KeyboardInterrupt:
-    res = ["File size: {}".format(fsize_sum)]
-    for key in sorted(status_obj):
-        res.append("{}: {}".format(key, status_obj.get(key)))
-    print("\n".join(res))
+    report_message(fsize_sum, status_obj)
     raise
