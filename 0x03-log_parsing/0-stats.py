@@ -37,9 +37,8 @@ try:
         for key in sorted(status_obj):
             print("{}: {}".format(key, status_obj.get(key)))
 
-except KeyboardInterrupt as e:
+except KeyboardInterrupt:
     res = ["File size: {}".format(fsize_sum)]
     for key in sorted(status_obj):
         res.append("{}: {}".format(key, status_obj.get(key)))
     print("\n".join(res))
-    raise e
