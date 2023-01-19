@@ -40,7 +40,8 @@ try:
             report_message(fsize_sum, status_obj)
             line_count = 0
 
-    report_message(fsize_sum, status_obj)
+    if fsize_sum and status_obj:
+        report_message(fsize_sum, status_obj)
 except KeyboardInterrupt:
     report_message(fsize_sum, status_obj)
     raise
