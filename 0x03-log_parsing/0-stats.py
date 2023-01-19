@@ -42,3 +42,4 @@ except KeyboardInterrupt:
     for key in sorted(status_obj):
         res.append("{}: {}".format(key, status_obj.get(key)))
     print("\n".join(res))
+    raise
