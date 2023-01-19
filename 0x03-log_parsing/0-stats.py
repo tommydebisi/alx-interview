@@ -19,6 +19,7 @@ def report_message(file_size, status_obj):
     for key in sorted(status_obj):
         print("{}: {}".format(key, status_obj.get(key)))
 
+
 try:
     for line in sys.stdin:
         if not re.search(regex, line):
