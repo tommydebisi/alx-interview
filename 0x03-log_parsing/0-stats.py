@@ -23,20 +23,17 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             line_count += 1
-            if not re.search(regex, line):
-                continue
+            if re.search(regex, line):
+                # get status code and file size
+                vals_needed = re.findall(regex, line)
+                fsize_sum += int(vals_needed[0][1])
+                status_code = int(vals_needed[0][0])
 
-            # get status code and file size
-            vals_needed = re.findall(regex, line)
-            fsize_sum += int(vals_needed[0][1])
-            status_code = int(vals_needed[0][0])
-
-            if status_code not in stat_codes:
-                continue
-
-            if not status_obj.get(status_code):
-                status_obj[status_code] = 0
-            status_obj[status_code] += 1
+                # check if status code is part of possible codes
+                if status_code in stat_codes:
+                    if not status_obj.get(status_code):
+                        status_obj[status_code] = 0
+                    status_obj[status_code] += 1
 
             if line_count == 10:
                 report_message(fsize_sum, status_obj)
