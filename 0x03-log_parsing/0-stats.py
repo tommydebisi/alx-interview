@@ -19,7 +19,7 @@ def handler(signal_recieved, frame, fsize_sum: int, status_list):
 line_count = 0
 fsize_sum = 0
 status_obj = dict()
-regex = r'^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$'
+regex = r"^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$"
 
 for line in sys.stdin:
     if not re.search(regex, line):
