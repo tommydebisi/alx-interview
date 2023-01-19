@@ -19,7 +19,6 @@ def report_message(file_size, status_obj):
     for key in sorted(status_obj):
         print("{}: {}".format(key, status_obj.get(key)))
 
-
 try:
     for line in sys.stdin:
         if not re.search(regex, line):
@@ -40,9 +39,7 @@ try:
             report_message(fsize_sum, status_obj)
             line_count = 0
 
-    # means that message hasn't been printed
-    if line_count > 0:
-        report_message(fsize_sum, status_obj)
+    report_message(fsize_sum, status_obj)
 except KeyboardInterrupt:
     report_message(fsize_sum, status_obj)
     raise
