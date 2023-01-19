@@ -23,6 +23,7 @@ def report_message(file_size, status_obj):
 if __name__ == "__main__":
     try:
         for line in sys.stdin:
+            line_count += 1
             if not re.search(regex, line):
                 continue
 
@@ -34,8 +35,6 @@ if __name__ == "__main__":
             if not status_obj.get(status_code):
                 status_obj[status_code] = 0
             status_obj[status_code] += 1
-
-            line_count += 1
 
             if line_count == 10:
                 report_message(fsize_sum, status_obj)
