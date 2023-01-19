@@ -10,6 +10,7 @@ if __name__ == "__main__":
     fsize_sum = 0
     status_obj = dict()
     regex = r"^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$"
+    stat_codes = [200, 301, 400, 401, 403, 404, 405, 500]
 
     def report_message(file_size, status_obj):
         """
@@ -29,6 +30,9 @@ if __name__ == "__main__":
             vals_needed = re.findall(regex, line)
             fsize_sum += int(vals_needed[0][1])
             status_code = int(vals_needed[0][0])
+
+            if status_code not in stat_codes:
+                continue
 
             if not status_obj.get(status_code):
                 status_obj[status_code] = 0
