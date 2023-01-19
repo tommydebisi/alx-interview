@@ -3,7 +3,6 @@
     0-stats mod
 """
 import sys
-import re
 
 if __name__ == "__main__":
     line_count = 0
@@ -23,17 +22,19 @@ if __name__ == "__main__":
     try:
         for line in sys.stdin:
             line_count += 1
-            if re.search(regex, line):
+            try:
                 # get status code and file size
-                vals_needed = re.findall(regex, line)
-                fsize_sum += int(vals_needed[0][1])
-                status_code = int(vals_needed[0][0])
+                vals_needed = line.split(" ")
+                fsize_sum += int(vals_needed[-1])
+                status_code = int(vals_needed[-2])
 
                 # check if status code is part of possible codes
                 if status_code in stat_codes:
                     if not status_obj.get(status_code):
                         status_obj[status_code] = 0
                     status_obj[status_code] += 1
+            except (IndexError, ValueError):
+                pass
 
             if line_count == 10:
                 report_message(fsize_sum, status_obj)
