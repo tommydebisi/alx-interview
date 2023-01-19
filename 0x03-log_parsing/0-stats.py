@@ -5,22 +5,20 @@
 import sys
 import re
 
-line_count = 0
-fsize_sum = 0
-status_obj = dict()
-regex = r"^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$"
-
-
-def report_message(file_size, status_obj):
-    """
-        prints the format message to screen
-    """
-    print("File size: {}".format(file_size))
-    for key, val in sorted(status_obj.items()):
-        print("{}: {}".format(key, val))
-
-
 if __name__ == "__main__":
+    line_count = 0
+    fsize_sum = 0
+    status_obj = dict()
+    regex = r"^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$"
+
+    def report_message(file_size, status_obj):
+        """
+            prints the format message to screen
+        """
+        print("File size: {}".format(file_size))
+        for key, val in sorted(status_obj.items()):
+            print("{}: {}".format(key, val))
+
     try:
         for line in sys.stdin:
             line_count += 1
