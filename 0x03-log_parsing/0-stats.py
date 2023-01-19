@@ -31,9 +31,15 @@ try:
             for key in sorted(status_obj):
                 print("{}: {}".format(key, status_obj.get(key)))
             line_count = 0
-except KeyboardInterrupt:
+
+    if line_count < 10:
+        print("File size: {}".format(fsize_sum))
+        for key in sorted(status_obj):
+            print("{}: {}".format(key, status_obj.get(key)))
+
+except KeyboardInterrupt as e:
     res = ["File size: {}".format(fsize_sum)]
     for key in sorted(status_obj):
         res.append("{}: {}".format(key, status_obj.get(key)))
     print("\n".join(res))
-    print()
+    raise e
