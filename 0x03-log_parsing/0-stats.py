@@ -19,6 +19,7 @@ def report_message(file_size, status_obj):
     for key, val in sorted(status_obj.items()):
         print("{}: {}".format(key, val))
 
+
 if __name__ == "__main__":
     try:
         for line in sys.stdin:
