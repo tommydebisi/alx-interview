@@ -5,10 +5,9 @@
 import sys
 import re
 import signal
-from typing import List
 
 
-def handler(signal_recieved, frame, fsize_sum: int, status_list: List) -> None:
+def handler(signal_recieved, frame, fsize_sum: int, status_list):
     """
         Handles the signal passed in
     """
@@ -24,7 +23,6 @@ regex = r'^\d.*\s\-\s\[\d*.*\]\s\"GET.*\"\s(\d*)\s(\d*)$'
 
 for line in sys.stdin:
     if not re.search(regex, line):
-        line_count += 1
         continue
 
     vals_needed = re.findall(regex, line)
