@@ -1,0 +1,39 @@
+UTF-8 validation
+
+Points I know:
+- maximum number of bytes in utf-8 is 4
+- for 4bytes the Most significant bytes has to start with '1111' followed by '0'
+  then the remaining 3 bytes have to start with '10'
+- for 3bytes the Most significant bytes has to start with '111' followed by '0'
+  then the remaining 2 bytes have to start with '10'
+- for 2bytes the Most significant bytes has to start with '11' followed by '0'
+  then the remaining byte has to start with '10'
+- for 1byte the byte has to start with '0'
+
+Based on the points above my pseudocode is formed
+Pseudocode:
+- declare a variable [byte_num] and initialize it
+- loop through the list of integers
+	- check if length of the converted integer to binary is greater than 8
+		- make use of the last 8bits of the converted integer
+	- check if length of the converted integer to binary is less than 8
+		- check if [byte_num] is not 0
+			- return false as it is not UTF-8
+	- else if length of the converted integer to binary is 8
+		- check if [byte_num] is 0
+			- if binary string starts with '10'
+				- return false as it's not UTF-8 encoded
+			- loop through the binary string to get the number of bytes
+				- check if bytes is 5
+					- return false meaning is not UTF-8
+				- check if item gotten from the string is '0'
+					- break the loop as we have gotten the number of bytes
+				- increment [byte_num]
+			- decrement [bytes] by 1 as we are in the first byte currently
+		- else if [byte_num] is not 0
+			- check if binary string doesn't starts with '10'
+				- return false meaning it's not UTF-8 encoded
+			- decrement [byte_num]
+
+return false if [byte_num] is not 0
+return True after the end of Loop as the list of integers are UTF-8 encoded
