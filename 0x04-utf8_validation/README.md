@@ -8,6 +8,28 @@
 - The data will be represented by a list of integers
 - Each integer represents 1 byte of data, therefore you only need to handle the 8 least significant bits of each integer
 
+**create 0-main.py file to test**
+```bash
+tommy@ubuntu:~/0x04-utf8_validation$ cat 0-main.py
+#!/usr/bin/python3
+"""
+Main file for testing
+"""
+
+validUTF8 = __import__('0-validate_utf8').validUTF8
+
+data = [65]
+print(validUTF8(data))
+
+data = [80, 121, 116, 104, 111, 110, 32, 105, 115, 32, 99, 111, 111, 108, 33]
+print(validUTF8(data))
+
+data = [229, 65, 127, 256]
+print(validUTF8(data))
+
+tommy@ubuntu:~/0x04-utf8_validation$
+```
+
 ```bash
 tommy@ubuntu:~/0x04-utf8_validation$ ./0-main.py
 True
