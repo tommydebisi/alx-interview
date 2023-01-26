@@ -9,14 +9,26 @@ def validUTF8(data):
         determines if a given data set represents a valid UTF-8 encoding.
         returns true if valid or false if not
     """
-    for val in data:
-        # get binary string
-        bin_s = bin(val)[2:]
+    byte_num = 0
+    for elem in data:
+        bin_str = bin(elem)[2:]
+        if len(bin_str) < 8:
+            if byte_num != 0:
+                return False
+        elif len(bin_str) == 8:
+            if byte_num == 0:
+                for ints in bin_str:
+                    if byte_num == 5:
+                        return False
 
-        if len(bin_s) > 8:
-            bin_s = bin_s[(len(bin_s) - 8):]
-
-        if not bin_s.startswith('1') or '1' not in bin_s or '0' not in bin_s:
+                    if ints == '0':
+                        break
+                    byte_num += 1
+                byte_num -= 1
+            else:
+                if not bin_str.startswith('10'):
+                    return False
+                byte_num -= 1
+        else:
             return False
-
     return True
