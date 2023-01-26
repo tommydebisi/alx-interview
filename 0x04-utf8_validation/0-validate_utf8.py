@@ -17,6 +17,9 @@ def validUTF8(data):
                 return False
         elif len(bin_str) == 8:
             if byte_num == 0:
+                if bin_str.startswith('10'):
+                    return False
+
                 for ints in bin_str:
                     if byte_num == 5:
                         return False
