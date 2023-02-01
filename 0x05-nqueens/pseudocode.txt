@@ -5,11 +5,10 @@ Problem:
 
 Pseudocode:
 - generate the chess board N intializing all points with "empty"
-- create an empty list "sol_list" where the solutions will be stored 
 - create recursive function "solveQueens" where the solutions will be gotten from
-- pass in the initialized board, sol_list, N and initial row to the function
+- pass in the initialized board, N and initial row to the function
 	- check if the row equals N
-		- function to add coordinates to ans_list
+		- create function "printQueen" to print solution for the line
 		- return if so
 	- loop through the columns in range of N
 		- create a function "checkSafe" to check if it is safe to place a queen
