@@ -1,0 +1,26 @@
+N queens problem
+Problem:
+- The need to print out the coordinates ofN queens where they can be placed on the 
+  chess board N that they can't attack each other
+
+Pseudocode:
+- generate the chess board N intializing all points with "empty"
+- create an empty list "sol_list" where the solutions will be stored 
+- create recursive function "solveQueens" where the solutions will be gotten from
+- pass in the initialized board, sol_list, N and initial row to the function
+	- check if the row equals N
+		- function to add coordinates to ans_list
+		- return if so
+	- loop through the columns in range of N
+		- create a function "checkSafe" to check if it is safe to place a queen
+		- pass in the board, N, row, column to the function "checkSafe"
+			- check through horizontally upwards provided row and col
+    	  		  are greater than 0
+				- if row and col on board is "Queen" return false 
+			- check left upper diagional if a queen is present and return false
+			- check right upper diagonal if a queen is present and return false
+			- return true if still in the function, it shows that row, col is free
+		- check if "checkSafe" is true
+			- set row and col on board to "Queen"
+			- because i've seen a safe spot i call the function "SolveQueens" incrementing the row
+			- set rown and col on board to default "Empty"
