@@ -24,21 +24,28 @@ const promUrl = new Promise((resolve, reject) => {
     if (err) {
       reject(console.log(err));
     }
+    resolve(body.characters);
+  });
+});
 
-    body.characters.forEach(element => {
-      request.get({ url: element, json: true }, (err, res, body) => {
-        if (err) {
-          reject(console.log(err));
-        }
+const promName = (element) => new Promise((resolve, reject) => {
+  request.get({ url: element, json: true }, (err, res, body) => {
+    if (err) {
+      reject(console.log(err));
+    }
 
-        resolve(console.log(body.name));
-      });
-    });
+    resolve(console.log(body.name));
   });
 });
 
 async function getReq () {
-  await promUrl;
+  const resArr = [];
+  const body = await promUrl;
+
+  for (const val of body) {
+    resArr.push(await promName(val));
+  }
+  resArr.join('\n');
 }
 
 getReq();
