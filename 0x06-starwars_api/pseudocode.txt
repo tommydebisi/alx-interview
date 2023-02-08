@@ -1,0 +1,17 @@
+Starwars Api
+
+Psuedocode:
+- check for correct arguments (we want to be to get 1 arg from terminal)
+- store the url
+- create and store a new promise that resolves the array of characters
+	- use the request get method and set json to true ({url, json: true})
+	- control the error gotten
+	- resolve body.characters
+- create and store a function that takes in a url from characters array and resolves the name gotten from the url
+- create async function
+- create a new Array
+- await the resolved promise to get array of characters
+- loop through the array of characters and push the resolved val of each character to new Array
+- seperate the elements in the array by a new line
+
+- call the async function
