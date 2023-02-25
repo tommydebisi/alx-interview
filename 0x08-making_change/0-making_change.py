@@ -2,10 +2,9 @@
 """
     making-change mod
 """
-from typing import List, Tuple
 
 
-def makeChange(coins: List, total: int):
+def makeChange(coins, total):
     """
         get the smallest number of change to make from each coin
     """
@@ -17,15 +16,14 @@ def makeChange(coins: List, total: int):
 
     for coin in coin_list:
         c_index = coin_list.index(coin)
-        result: Tuple = getSumChange(coin_list[c_index:], total, 0, 0)
+        result = getSumChange(coin_list[c_index:], total, 0, 0)
 
         if result[0] == total:
             return result[1]
     return -1
 
 
-def getSumChange(rev_coins: List, total: int,
-                 coin_sum: int, coin_count: int) -> Tuple[int, int]:
+def getSumChange(rev_coins, total, coin_sum, coin_count):
     """
         returns a tuple of the coin_sum and the coin count
     """
