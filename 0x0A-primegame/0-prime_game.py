@@ -14,6 +14,8 @@ def isWinner(x, nums):
             x: number of rounds
             nums: array of numbers
     """
+    if x != len(nums) or not nums:
+        return None
     current, m_win, b_win = '', 0, 0
     for round in range(x):
         # maria starts first
