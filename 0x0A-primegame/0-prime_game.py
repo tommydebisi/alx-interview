@@ -4,6 +4,20 @@
 """
 
 
+def isPrime(num):
+    """
+        returns true if it's a prime number or false
+        if not
+    """
+    half_num = num // 2
+    if half_num == 1:
+        return True
+    for i in range(2, half_num + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
 def isWinner(x, nums):
     """
         Takes in number of rounds `x` and a list of numbers
@@ -14,29 +28,34 @@ def isWinner(x, nums):
             x: number of rounds
             nums: array of numbers
     """
-    if x != len(nums) or not nums:
-        return None
     current, m_win, b_win = '', 0, 0
+    if not nums:
+        return None
+
+    # cache prime numbers needed to complete prime game
+    prime_list = [num for num in range(2, max(nums)) if isPrime(num)]
+
     for round in range(x):
         # maria starts first
         current = 'Maria'
 
         populate_num = nums[round]
-        populated_list = [num for num in range(1, populate_num + 1)]
+        if not populate_num:
+            continue
 
-        while len(populated_list) > 1:
-            prime = populated_list[1]
+        if populate_num == 1:
+            b_win += 1
+            continue
 
-            # get multiples of prime
-            p_multi = [i * prime for i in range(len(populated_list))
-                       if (i * prime) in populated_list]
+        while populate_num not in prime_list:
+            populate_num -= 1
 
-            # map through and remove all multiples in populated list
-            for num in p_multi:
-                populated_list.remove(num)
+        populated_list = prime_list[:prime_list.index(populate_num) + 1]
 
-            # nect person's turn to pick
+        for n in populated_list:
+            # next person's turn to pick
             current = 'Maria' if current == 'Ben' else 'Ben'
+
         if current == 'Ben':
             m_win += 1
         else:
