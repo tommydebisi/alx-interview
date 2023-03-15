@@ -8,42 +8,25 @@ def island_perimeter(grid):
     """
         returns the permiter of island
     """
+    if type(grid) is not list:
+        return 0
+    if not all([type(row) is list for row in grid]):
+        return 0
+    if not all([len(row) == len(grid[0]) for row in grid]):
+        return 0
+
     perimeter = 0
-    for row in range(len(grid)):
-        for col in range(len(grid[0])):
-            if grid[row][col] == 1:
-                peri_tuple = checkHorizontalVertical(grid, perimeter, row, col)
-
-                if peri_tuple[1] == 4:
-                    return peri_tuple[1]
-
-                perimeter += peri_tuple[0]
+    for i, row in enumerate(grid):
+        for j, cell in enumerate(row):
+            if cell == 0:
+                continue
+            m, n = len(grid) - 1, len(row) - 1
+            neighbors = (
+                i > 0 and grid[i-1][j] == 1,    # top
+                i < m and grid[i+1][j] == 1,    # bottom
+                j > 0 and grid[i][j-1] == 1,    # left
+                j < n and grid[i][j+1] == 1,    # right
+            )
+            # add the contribution of this cell to the perimeter
+            perimeter += 4 - sum(neighbors)
     return perimeter
-
-
-def checkHorizontalVertical(grid, current_peri, row, col):
-    """
-        checks the grid horizontally and vertically
-    """
-    perimeter = 0
-    count = 0
-
-    if grid[row][col - 1] == 0:
-        perimeter += 1
-        count += 1
-
-    if grid[row][col + 1] == 0:
-        perimeter += 1
-        count += 1
-
-    if grid[row - 1][col] == 0:
-        perimeter += 1
-        count += 1
-
-    if grid[row + 1][col] == 0:
-        perimeter += 1
-        count += 1
-
-    if count == 4:
-        return (perimeter, count)
-    return (perimeter, 0)
